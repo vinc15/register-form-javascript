@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Registration Form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            padding: 5px;
+            width: 200px;
+            margin-top: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Registration Form</h2>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name">
+    <div class="error" id="nameError">Name is required</div>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email">
+    <div class="error" id="emailError">Invalid email</div>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password">
+    <div class="error" id="passwordError">Password must be at least 6 characters</div>
+    <br>
+    <button id="submit" disabled>Register</button>
+
+    <script>
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const submit = document.getElementById("submit");
+
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const passwordError = document.getElementById("passwordError");
+
+        function validate() {
+            let isValid = true;
+
+            if (name.value.trim() === "") {
+                nameError.style.display = "block";
+                isValid = false;
+            } else {
+                nameError.style.display = "none";
+            }
+
+            if (!email.value.includes("@") || !email.value.includes(".")) {
+                emailError.style.display = "block";
+                isValid = false;
+            } else {
+                emailError.style.display = "none";
+            }
+
+            if (password.value.length < 6) {
+                passwordError.style.display = "block";
+                isValid = false;
+            } else {
+                passwordError.style.display = "none";
+            }
+
+
+            submit.disabled = !isValid;
+        }
+
+        name.addEventListener("input", validate);
+        email.addEventListener("input", validate);
+        password.addEventListener("input", validate);
+
+
+        submit.addEventListener("click", function () {
+            alert("Form submitted successfully!");
+        });
+
+        validate();
+    </script>
+
+</body>
+
+</html>
